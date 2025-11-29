@@ -5,8 +5,7 @@ app.post('/api/auth/register', async (req, res) => {
   try {
     const { email, phone, password } = req.body;
     
-    // التحقق من المدخلات
-    if (!email || !password) {
+// Validate the inputs     if (!email || !password) {
       return res.status(400).json({ error: 'MISSING_FIELDS' });
     }
     
@@ -16,8 +15,7 @@ app.post('/api/auth/register', async (req, res) => {
 
     const db = await initMongo();
 
-    // التحقق من عدم وجود المستخدم مسبقاً
-    const existingUser = await db.collection('users').findOne({
+// Check that the user does not already exist    const existingUser = await db.collection('users').findOne({
       $or: [
         { email: email },
         ...(phone ? [{ phone: phone }] : [])
@@ -28,8 +26,7 @@ app.post('/api/auth/register', async (req, res) => {
       return res.status(409).json({ error: 'EMAIL_EXISTS' });
     }
 
-    // إنشاء المستخدم الجديد
-    const now = new Date();
+// Create the new user    const now = new Date();
     const hash = await bcrypt.hash(password, 10);
 
     const newUser = {
