@@ -1,79 +1,86 @@
-# دليل النشر والإصلاح - Infinity-X Platform
+# **Deployment & Debug Guide – Infinity-X Platform**
 
-## 📋 المحتويات
+## 📋 Contents
 
-1. [إعداد قاعدة البيانات](#إعداد-قاعدة-البيانات)
-2. [إعداد متغيرات البيئة](#إعداد-متغيرات-البيئة)
-3. [تحديث الكود](#تحديث-الكود)
-4. [إنشاء Super Admin](#إنشاء-super-admin)
-5. [النشر](#النشر)
-6. [الاختبار](#الاختبار)
-
----
-
-## 1. إعداد قاعدة البيانات
-
-### MongoDB Atlas (مجاني)
-
-1. **إنشاء حساب**:
-   - اذهب إلى: https://www.mongodb.com/cloud/atlas/register
-   - أنشئ حساب مجاني
-
-2. **إنشاء Cluster**:
-   - اختر "Create a FREE cluster"
-   - اختر المنطقة الأقرب لك (مثل Frankfurt)
-   - انتظر حتى يتم إنشاء الـ cluster (2-3 دقائق)
-
-3. **إعداد الوصول**:
-   - اذهب إلى "Database Access"
-   - أضف مستخدم جديد (username + password)
-   - احفظ البيانات في مكان آمن
-
-4. **السماح بالاتصال**:
-   - اذهب إلى "Network Access"
-   - اضغط "Add IP Address"
-   - اختر "Allow Access from Anywhere" (0.0.0.0/0)
-
-5. **الحصول على رابط الاتصال**:
-   - اذهب إلى "Database"
-   - اضغط "Connect"
-   - اختر "Connect your application"
-   - انسخ الرابط (يبدأ بـ `mongodb+srv://...`)
-   - استبدل `<password>` بكلمة المرور الحقيقية
+1. [Database Setup](#database-setup)
+2. [Environment Variables Setup](#environment-variables-setup)
+3. [Code Updates](#code-updates)
+4. [Creating Super Admin](#creating-super-admin)
+5. [Deployment](#deployment)
+6. [Testing](#testing)
 
 ---
 
-## 2. إعداد متغيرات البيئة
+## **1. Database Setup**
 
-### على Render
+### **MongoDB Atlas (Free)**
 
-1. **اذهب إلى Render Dashboard**:
-   - https://dashboard.render.com
+1. **Create an Account:**
 
-2. **اختر `infinityx-backend`**
+   * Go to: [https://www.mongodb.com/cloud/atlas/register](https://www.mongodb.com/cloud/atlas/register)
+   * Create a free account
 
-3. **اذهب إلى "Environment"**
+2. **Create a Cluster:**
 
-4. **أضف المتغيرات التالية**:
+   * Choose “Create a FREE cluster”
+   * Choose the region closest to you (e.g., Frankfurt)
+   * Wait for the cluster to be created (2–3 minutes)
 
-   | Key | Value | ملاحظات |
-   |-----|-------|---------|
-   | `MONGO_URI` | `mongodb+srv://...` | من MongoDB Atlas |
-   | `DB_NAME` | `future_system` | اسم قاعدة البيانات |
-   | `NODE_ENV` | `production` | بيئة الإنتاج |
-   | `PORT` | `10000` | البورت (موجود مسبقاً) |
+3. **Configure Access:**
 
-5. **اضغط "Save Changes"**
+   * Go to **Database Access**
+   * Add a new user (username + password)
+   * Save the credentials somewhere safe
+
+4. **Allow Connections:**
+
+   * Go to **Network Access**
+   * Click **Add IP Address**
+   * Choose **Allow Access from Anywhere (0.0.0.0/0)**
+
+5. **Get the Connection URI:**
+
+   * Go to **Database**
+   * Click **Connect**
+   * Choose **Connect your application**
+   * Copy the string that starts with `mongodb+srv://...`
+   * Replace `<password>` with your real password
 
 ---
 
-## 3. تحديث الكود
+## **2. Environment Variables Setup**
 
-### الملفات التي يجب تحديثها:
+### **On Render**
 
-#### 3.1 تحديث `Login.jsx`
+1. Go to Render Dashboard:
+   [https://dashboard.render.com](https://dashboard.render.com)
 
-استبدل محتوى `dashboard-x/src/pages/Login.jsx` بمحتوى `Login_FIXED.jsx`:
+2. Select **`infinityx-backend`**
+
+3. Open **Environment**
+
+4. Add the following variables:
+
+| Key         | Value               | Notes                  |
+| ----------- | ------------------- | ---------------------- |
+| `MONGO_URI` | `mongodb+srv://...` | From MongoDB Atlas     |
+| `DB_NAME`   | `future_system`     | Database name          |
+| `NODE_ENV`  | `production`        | Production environment |
+| `PORT`      | `10000`             | Already configured     |
+
+5. Click **Save Changes**
+
+---
+
+## **3. Code Updates**
+
+### Files that must be updated:
+
+---
+
+### **3.1 Update `Login.jsx`**
+
+Replace the content of `dashboard-x/src/pages/Login.jsx` with `Login_FIXED.jsx`:
 
 ```bash
 cd dashboard-x/src/pages
@@ -81,50 +88,59 @@ mv Login.jsx Login_OLD.jsx
 mv Login_FIXED.jsx Login.jsx
 ```
 
-#### 3.2 إضافة صفحة Signup
+---
 
-انسخ ملف `Signup.jsx` إلى مجلد `pages`:
+### **3.2 Add Signup Page**
+
+Copy `Signup.jsx` into `pages`:
 
 ```bash
-# الملف موجود بالفعل في:
+# The file already exists at:
 # dashboard-x/src/pages/Signup.jsx
 ```
 
-#### 3.3 تحديث `App.jsx`
+---
 
-أضف route للـ Signup:
+### **3.3 Update `App.jsx`**
+
+Add a route for Signup:
 
 ```jsx
-// في dashboard-x/src/App.jsx
+// inside dashboard-x/src/App.jsx
 import Signup from './pages/Signup';
 
-// أضف هذا السطر في Routes:
+// Add this line inside <Routes>:
 <Route path="/signup" element={<Signup />} />
 ```
 
-#### 3.4 إضافة endpoint التسجيل في Backend
+---
 
-أضف الكود من `REGISTER_ENDPOINT.mjs` في `backend/server.mjs` بعد endpoint `/api/auth/login`.
+### **3.4 Add Registration Endpoint to Backend**
+
+Add the code from `REGISTER_ENDPOINT.mjs` into `backend/server.mjs`, right after the `/api/auth/login` endpoint.
 
 ---
 
-## 4. إنشاء Super Admin
+## **4. Creating Super Admin**
 
-### الطريقة 1: باستخدام السكريبت (موصى به)
+### **Method 1: Using the Script (Recommended)**
 
 ```bash
 cd backend
-npm install  # إذا لم تكن مثبتة
+npm install
 node scripts/create-super-admin.mjs
 ```
 
-سيطلب منك:
-- API URL (اضغط Enter للافتراضي)
-- Email
-- Password
-- Phone (اختياري)
+The script will ask you for:
 
-### الطريقة 2: باستخدام curl
+* API URL (press Enter for default)
+* Email
+* Password
+* Phone (optional)
+
+---
+
+### **Method 2: Using curl**
 
 ```bash
 curl -X POST https://api.xelitesolutions.com/api/auth/bootstrap-super-admin \
@@ -137,54 +153,63 @@ curl -X POST https://api.xelitesolutions.com/api/auth/bootstrap-super-admin \
 
 ---
 
-## 5. النشر
+## **5. Deployment**
 
-### 5.1 نشر الكود على GitHub
+### **5.1 Push Code to GitHub**
 
 ```bash
-# في مجلد المشروع الرئيسي
+cd project-root
 git add .
 git commit -m "Fix: Update authentication system"
 git push origin main
 ```
 
-### 5.2 نشر Frontend على Cloudflare
+---
 
-سيتم النشر تلقائياً عند push إلى GitHub (إذا كان Cloudflare Pages متصل بالـ repo).
+### **5.2 Deploy Frontend on Cloudflare**
 
-أو يمكنك النشر يدوياً:
+Automatically deploys when pushing to GitHub (if connected).
+
+Or deploy manually:
 
 ```bash
 cd dashboard-x
 pnpm install
 pnpm run build
 
-# ثم ارفع محتوى dist/ إلى Cloudflare Pages
+# Then upload the dist/ folder to Cloudflare Pages
 ```
-
-### 5.3 نشر Backend على Render
-
-سيتم النشر تلقائياً عند push إلى GitHub.
-
-أو يمكنك إعادة النشر يدوياً من Render Dashboard:
-- اذهب إلى `infinityx-backend`
-- اضغط "Manual Deploy" > "Deploy latest commit"
 
 ---
 
-## 6. الاختبار
+### **5.3 Deploy Backend on Render**
 
-### 6.1 اختبار Backend
+Deploys automatically on GitHub push.
+
+Or manually from Render Dashboard:
+
+* Open **infinityx-backend**
+* Click **Manual Deploy → Deploy latest commit**
+
+---
+
+## **6. Testing**
+
+### **6.1 Test Backend**
 
 ```bash
-# اختبار الصفحة الرئيسية
 curl https://api.xelitesolutions.com
-
-# يجب أن تحصل على:
-# {"ok":true,"service":"InfinityX Backend / Future Systems Core","msg":"Running",...}
 ```
 
-### 6.2 اختبار تسجيل الدخول
+You should get:
+
+```
+{"ok":true,"service":"InfinityX Backend / Future Systems Core","msg":"Running",...}
+```
+
+---
+
+### **6.2 Test Login**
 
 ```bash
 curl -X POST https://api.xelitesolutions.com/api/auth/login \
@@ -193,67 +218,82 @@ curl -X POST https://api.xelitesolutions.com/api/auth/login \
     "emailOrPhone": "admin@xelitesolutions.com",
     "password": "YourPassword"
   }'
-
-# يجب أن تحصل على:
-# {"ok":true,"sessionToken":"...","user":{...}}
 ```
 
-### 6.3 اختبار Frontend
+Expected:
 
-1. افتح المتصفح واذهب إلى: https://xelitesolutions.com
-2. يجب أن تظهر صفحة Login
-3. أدخل Email وPassword
-4. يجب أن يتم تسجيل الدخول والتوجيه إلى Dashboard
-
----
-
-## 🔧 استكشاف الأخطاء
-
-### المشكلة: Backend لا يعمل
-
-**الحل**:
-1. تحقق من متغيرات البيئة على Render
-2. تحقق من Logs في Render Dashboard
-3. تأكد من أن `MONGO_URI` صحيح
-
-### المشكلة: Frontend لا يتصل بـ Backend
-
-**الحل**:
-1. تحقق من ملف `.env` في `dashboard-x`:
-   ```
-   VITE_API_BASE_URL=https://api.xelitesolutions.com
-   ```
-2. تأكد من أن Backend يعمل
-3. تحقق من CORS في `backend/server.mjs`
-
-### المشكلة: لا يمكن تسجيل الدخول
-
-**الحل**:
-1. تأكد من إنشاء Super Admin أولاً
-2. تحقق من Email وPassword
-3. افتح Console في المتصفح وابحث عن أخطاء
+```
+{"ok":true,"sessionToken":"...","user":{...}}
+```
 
 ---
 
-## 📞 الدعم
+### **6.3 Test Frontend**
 
-إذا واجهت أي مشاكل:
-1. تحقق من Logs في Render
-2. تحقق من Console في المتصفح
-3. تحقق من Network tab في DevTools
-
----
-
-## ✅ قائمة التحقق النهائية
-
-- [ ] MongoDB Atlas تم إعداده
-- [ ] متغيرات البيئة تم إضافتها على Render
-- [ ] الكود تم تحديثه على GitHub
-- [ ] Super Admin تم إنشاؤه
-- [ ] Backend يعمل بشكل صحيح
-- [ ] Frontend يعمل بشكل صحيح
-- [ ] تسجيل الدخول يعمل
+1. Open: [https://xelitesolutions.com](https://xelitesolutions.com)
+2. Login page should appear
+3. Enter Email + Password
+4. You should be redirected to the Dashboard
 
 ---
 
-**تم بنجاح! 🎉**
+## 🔧 Troubleshooting
+
+### **Issue: Backend not running**
+
+**Fix:**
+
+1. Check environment variables in Render
+2. Check Render Logs
+3. Ensure `MONGO_URI` is correct
+
+---
+
+### **Issue: Frontend not connecting to Backend**
+
+**Fix:**
+
+1. Check `.env` in `dashboard-x`:
+
+```
+VITE_API_BASE_URL=https://api.xelitesolutions.com
+```
+
+2. Ensure backend is running
+3. Check CORS in `backend/server.mjs`
+
+---
+
+### **Issue: Cannot log in**
+
+**Fix:**
+
+1. Make sure Super Admin is created
+2. Check email + password
+3. Open browser console for errors
+
+---
+
+## 📞 Support
+
+If you face issues:
+
+1. Check Render logs
+2. Check browser Console
+3. Check Network tab in DevTools
+
+---
+
+## ✅ Final Checklist
+
+* [ ] MongoDB Atlas setup complete
+* [ ] Environment variables added in Render
+* [ ] Code updated on GitHub
+* [ ] Super Admin created
+* [ ] Backend running
+* [ ] Frontend running
+* [ ] Login working
+
+---
+
+**All set! 🎉**
