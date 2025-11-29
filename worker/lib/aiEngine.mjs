@@ -1,7 +1,8 @@
 /**
- * AI Engine - محرك الذكاء الاصطناعي لتوليد الكود
- * يستخدم OpenAI API لتوليد المشاريع الكاملة
+ * AI Engine – Artificial Intelligence engine for code generation
+ * Uses the OpenAI API to generate complete projects
  */
+
 
 import OpenAI from 'openai';
 
