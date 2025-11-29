@@ -3,7 +3,6 @@
  * Uses the OpenAI API to generate complete projects
  */
 
-
 import OpenAI from 'openai';
 
 const openai = new OpenAI({
