@@ -1,25 +1,32 @@
-# 🤖 JOE - Just One Engine
+🤖 JOE - Just One Engine
+A complete AI system just like Manus!
 
-## نظام AI متكامل مثل Manus تماماً!
+JOE works exactly like Manus with all the features included:
 
-**JOE** يعمل مثل Manus بالضبط مع جميع المميزات:
+✅ Completed Features:
 
-## ✅ المميزات المكتملة:
+💬 Chat History – Sidebar + conversation saving
 
-1. **💬 Chat History** - Sidebar + حفظ المحادثات
-2. **🌐 Browser Control** - عرض مباشر + زر السيطرة
-3. **🎤 Voice Input** - تحدث مع JOE
-4. **🤖 AI Builder** - بناء مشاريع تلقائياً
-5. **🧬 Self-Evolution** - تطور ذاتي
-6. **🛍️ Store Integration** - ربط المتاجر
-7. **🔗 Integrations** - GitHub, Render, Cloudflare
+🌐 Browser Control – Live preview + control button
 
-## 🎯 الاستخدام:
+🎤 Voice Input – Talk to JOE
 
-**الرابط**: https://xelitesolutions.com/joe
+🤖 AI Builder – Automatic project generation
 
-**تسجيل الدخول**:
-- Email: info.auraaluxury@gmail.com
-- Password: younes2025
+🧬 Self-Evolution – Self-improving system
 
-**كل شيء حقيقي 100%!** 🚀
+🛍️ Store Integration – Connect e-commerce stores
+
+🔗 Integrations – GitHub, Render, Cloudflare
+
+🎯 Usage:
+
+Link: https://xelitesolutions.com/joe
+
+Login:
+
+Email: info.auraaluxury@gmail.com
+
+Password: younes2025
+
+Everything is 100% real! 🚀
