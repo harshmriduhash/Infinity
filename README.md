@@ -1,331 +1,142 @@
-# Infinity – AI-Native Modular SaaS Framework
+# Infinity — InfinityX Platform
 
-Infinity is a full-stack, modular, AI-native application framework designed to help founders, solo builders, and engineering teams ship production-ready AI SaaS products fast.
+Infinity is a modular, AI-first monorepo for building AI-powered SaaS products. It groups services for the API backend, dashboard UI, public marketing site, background workers (LLM/agent execution), and shared utilities so teams can iterate fast and deploy production-ready systems.
 
-It provides a clean, scalable architecture with separate modules for backend APIs, dashboard UI, public site, AI/AGI worker processes, and shared utilities — enabling you to build multiple SaaS products using a single unified codebase.
+Key goals:
+- Modular services you can run independently or with Docker
+- Worker-first architecture for LLM, embedding, and agent workflows
+- Ready-to-deploy configs for common hosts (Render, Cloudflare Pages)
 
-# 🚀 What is Infinity?
+## Repository layout
 
-Infinity is a starter framework built for the next generation of agentic, AI-powered applications. It includes:
+- `backend/` — Node.js API server (Express), auth, MongoDB integrations, admin routes.
+- `dashboard-x/` — React + Vite dashboard UI (admin/product dashboard).
+- `public-site/` — Marketing / landing pages for customers.
+- `worker/` — AI worker processes, background jobs, agent loops.
+- `joengine-agi/` — Experimental AGI/agent engine and tooling.
+- `shared/` — Cross-service utilities, constants and types.
+- `docker-compose.yml` — Local multi-service orchestration.
+- `SETUP_GUIDE.md`, `TESTING_GUIDE.md` — Helpful docs for deploy and testing.
 
-A TypeScript backend (APIs, auth, business logic)
+## Quick start (local)
 
-A beautiful dashboard frontend
+Prerequisites: Node.js 18+, Git, Docker (optional).
 
-A public-facing marketing site
+1. Clone the repo
 
-A worker engine for async jobs + AI execution
-
-A shared code layer to prevent duplication and keep things DRY
-
-One-command Docker-based deployment
-
-Production-ready structure for scaling multiple AI SaaS MVPs
-
-# 📦 Repository Structure
-
-Infinity/
-│
-├── backend/               # REST APIs, auth, DB models, business logic
-│   ├── src/
-│   ├── prisma/
-│   ├── ...               
-│
-├── dashboard-x/           # Admin dashboard / SaaS dashboard
-│   ├── src/
-│   ├── components/
-│   ├── pages/
-│   ├── ...
-│
-├── public-site/           # Marketing website / landing pages
-│   ├── src/
-│   ├── components/
-│   ├── ...
-│
-├── worker/                # Async jobs + AI/LLM/Agentic worker
-│   ├── src/
-│   ├── jobs/
-│   ├── services/
-│   ├── ...
-│
-├── joengine-agi/          # Experimental AGI/LLM/Agent framework
-│   ├── core/
-│   ├── memory/
-│   ├── agents/
-│   ├── ...
-│
-├── shared/                # Shared utilities, types, constants
-│   ├── utils/
-│   ├── types/
-│
-├── docker-compose.yml     # One-command infra setup
-├── SETUP_GUIDE.md         # Step-by-step setup instructions
-├── TESTING_GUIDE.md       # Testing workflows
-├── .env.example           # Environment variable template
-├── architecture.png       # System architecture diagram
-└── README.md
-
-🧠 Core Philosophy
-✔ Modular
-
-Every major component lives in its own module (backend, dashboard, worker, public site).
-
-✔ Scalable
-
-Architecture supports multi-product expansion — ideal for building multiple SaaS tools.
-
-✔ AI-Native
-
-Workers + AGI engine folder are built for LLM workflows, vector search, agents, tool-calling, and async tasks.
-
-✔ Deploy Anywhere
-
-Docker + Render deployment configs give frictionless deployment on any cloud.
-
-⚙️ Technology Stack
-Backend
-
-Node.js (TypeScript)
-
-Express / Fastify (based on your structure)
-
-Prisma ORM (if used)
-
-PostgreSQL / MongoDB
-
-Zod for validation
-
-JWT / Session Auth
-
-Frontend (Dashboard + Public Site)
-
-React / Next.js
-
-Tailwind CSS
-
-ShadCN UI components
-
-Vite or Next bundler
-
-AI Worker
-
-Node/Python hybrid support
-
-OpenAI / Anthropic / custom LLM integrations
-
-Background job queue
-
-Long-running agent loops
-
-Tool calling engines
-
-DevOps
-
-Docker + Docker Compose
-
-Render deployment files
-
-Static hosting + server containers
-
-🔧 Getting Started
-1. Clone the Repository
+```powershell
 git clone https://github.com/harshmriduhash/Infinity.git
-cd Infinity
+cd "Infinity-x-platform"
+```
 
-2. Install Dependencies
+2. Install per-service dependencies (or use your preferred package manager)
 
-Install all module dependencies:
-
-cd backend && npm install
-cd ../dashboard-x && npm install
-cd ../public-site && npm install
-cd ../worker && npm install
+```powershell
+cd backend
+npm install
+cd ../dashboard-x
+npm install
+cd ../worker
+npm install
+cd ../joengine-agi
+npm install
 cd ..
+```
 
-3. Environment Variables
+3. Copy environment templates and edit values
 
-Copy .env.example to .env in each module where required.
+```powershell
+copy backend\env.example backend\.env
+```
 
-cp backend/.env.example backend/.env
-cp worker/.env.example worker/.env
+Minimum useful env vars (examples):
 
+- `MONGO_URI` / `MONGODB_URI` — MongoDB connection string
+- `OPENAI_API_KEY` — OpenAI API key (or other LLM credentials)
+- `JWT_SECRET` — application JWT/session secret
+- `REDIS_URL` — optional Redis URL for cache/queues
 
-Common variables include:
+4. Run modules individually
 
-DATABASE_URL=""
-JWT_SECRET=""
-OPENAI_API_KEY=""
-REDIS_URL=""
+- Backend
 
-4. Start Development Environment
-Option A — Using Docker
-
-Easiest for full environment:
-
-docker-compose up --build
-
-
-This will spin up:
-
-Backend API server
-
-Dashboard
-
-Public site
-
-Worker service
-
-Database
-
-Redis (if configured)
-
-Option B — Without Docker
-
-Run modules individually:
-
+```powershell
 cd backend
 npm run dev
+```
 
-cd dashboard-x
+- Dashboard (development)
+
+```powershell
+cd ../dashboard-x
 npm run dev
+```
 
-cd public-site
+- Worker
+
+```powershell
+cd ../worker
 npm run dev
+```
 
-cd worker
+- JOEngine (experimental)
+
+```powershell
+cd ../joengine-agi
 npm run dev
+```
 
-🔥 Key Features
-✔ Unified monorepo architecture
+Alternatively, start the full stack with Docker Compose (recommended for full integration):
 
-One repo powering:
+```powershell
+docker-compose up --build
+```
 
-Backend
+## Notable scripts
 
-Dashboard
+- `backend/package.json`
+  - `start` — `node server.mjs`
+  - `dev` — same as `start` (server entrypoint)
+- `dashboard-x/package.json`
+  - `dev` — `vite`
+  - `build` — `vite build`
+  - `preview` — `vite preview`
+- `worker/package.json`
+  - `start` — `node worker-enhanced.mjs`
+  - `dev` — `node --watch worker-enhanced.mjs`
+- `joengine-agi/package.json`
+  - `start` — `node index.mjs`
+  - `dev` — `node --watch index.mjs`
 
-Public site
+## Backend details
 
-Workers
+- The backend is a Node/Express service in `backend/server.mjs`. It expects a MongoDB URI and optionally a Redis instance. Key routes include auth (`/api/auth`), dashboard data (`/api/dashboard`), factory and job endpoints, and worker stats (`/api/worker/stats`).
+- The backend includes utilities for creating a bootstrap super-admin (`/api/auth/bootstrap-super`) and standard email/phone login flows.
 
-AI engine
+## Worker & AGI engine
 
-✔ Worker-first AI execution model
+- The `worker/` folder contains background processes that run agent loops, LLM calls, and project generation tasks. The worker integrates with OpenAI and Google generative APIs when credentials are provided.
+- `joengine-agi/` provides experimental agent and reasoning engines (LangChain, Playwright, etc.). Treat this as experimental and isolated from production traffic unless you explicitly wire it in.
 
-Background LLM tasks
+## Deployment notes
 
-Agent loops
+- Render: the repo was designed to be compatible with Render Web Services and Background Workers. Use the service-specific `package.json` and point the Render service root to the appropriate folder (`backend`, `worker`, etc.).
+- Cloudflare Pages: build the dashboard with Vite and publish `dashboard-x/dist` as the Pages output.
+- Secrets: do not commit secrets. Use host/service environment variables for `MONGO_URI`, `OPENAI_API_KEY`, `JWT_SECRET`, `CLOUDFLARE_API_TOKEN`, etc.
 
-Vector embedding pipelines
+## Environment examples
 
-Rate-limiting + retries
+- See `backend/env.example` for a starter set of variables used by the backend (ports, OAuth values, CORS origins).
 
-✔ SaaS-ready dashboard
+## Testing
 
-Auth
+- Refer to `TESTING_GUIDE.md` for unit, integration, and worker testing recommendations, including mocking LLMs during CI runs.
 
-Usage metrics
+## Contributing
 
-Project settings
+- Fork → feature branch → PR with description and tests
+- Follow code style in each package and keep changes scoped to one service where possible
 
-Team management (optional)
+## License
 
-✔ Public marketing site
-
-Plug-and-play landing page templates for launching fast.
-
-✔ Shared code layer
-
-Types
-
-Error handlers
-
-Utils
-
-Token helpers
-
-✔ Deployment ready
-
-Works on Docker, Render, Railway, AWS, etc.
-
-📐 System Architecture
-
-The system follows a service-modular architecture:
-
-           ┌────────────────────┐
-           │   Public Website   │
-           └─────────┬──────────┘
-                     │
-                     ▼
-             ┌─────────────┐
-             │   Backend    │◄───────────┐
-             └──────┬──────┘            │
-                    │                   │
-                    ▼                   │
-              ┌────────┐          ┌───────────┐
-              │Worker  │─────────▶│ AGI Engine│
-              └────────┘          └───────────┘
-                    ▲
-                    │
-           ┌────────┴────────┐
-           │   Shared Utils   │
-           └──────────────────┘
-
-🧪 Testing
-
-Refer to TESTING_GUIDE.md for:
-
-Unit testing strategy
-
-API testing
-
-Worker job testing
-
-Mocking LLM models
-
-End-to-end workflows
-
-🛠 Planned Improvements
-
-Add CLI for project scaffolding
-
-Integrate Pinecone / ChromeDB vector DB
-
-Add built-in error monitoring
-
-Add rate-limiting and audit logs
-
-Multi-tenant SaaS support out of the box
-
-💼 Use Cases
-
-Infinity is perfect for building:
-
-AI SaaS Dashboards
-
-Agentic Workflow Platforms
-
-Code Assistants / RAG Tools
-
-CRM/Automation SaaS
-
-Analytics & Monitoring tools
-
-Any AI-first B2B product
-
-🧑‍💻 For Contributors
-
-Want to contribute?
-
-Fork the repo
-
-Create a feature branch
-
-Submit a PR with clear documentation
-
-All contributions are welcome.
-
-📩 Support
-
-For ideas, issues, or requests:
-Open a GitHub Issue on the repo.
+MIT
