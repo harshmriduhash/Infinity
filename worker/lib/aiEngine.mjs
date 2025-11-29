@@ -11,8 +11,7 @@ const openai = new OpenAI({
 });
 
 /**
- * توليد موقع ويب كامل
- */
+• Generate a complete website */
 export async function generateWebsite(description, style = 'modern') {
   const prompt = `Create a complete, modern, responsive website based on this description:
 "${description}"
