@@ -212,10 +212,9 @@ export default function StoreIntegration() {
           <button
             onClick={handleConnectStore}
             disabled={loading || !storeUrl || !apiToken}
-            className="w-full bg-gradient-to-r from-green-600 to-teal-600 text-white py-3 px-6 rounded-lg font-medium hover:from-green-700 hover:to-teal-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
-          >
-            {loading ? "جاري الاتصال..." : "🔗 ربط المتجر"}
-          </button>
+            className="w-full bg-gradient-to-r from-green-600 to-teal-600 text-white py-3 px-6 rounded-lg font-medium hover:from-green-700 hover:to-teal-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all">
+            {loading ? "Connecting..." : "🔗 Connect Store"}
+         </button>
 
           {connectionResult && (
             <div className="mt-6 p-4 bg-green-50 border border-green-200 rounded-lg">
@@ -223,7 +222,7 @@ export default function StoreIntegration() {
                 ✅ Successfully Connected!
               </h3>
               <p className="text-green-800">
-                <strong>اسم المتجر:</strong> {connectionResult.storeData?.name}
+               <strong>Store Name:</strong> {connectionResult.storeData?.name}
               </p>
               <p className="text-green-800 text-sm">
                   Connected at:{" "}                {new Date(
