@@ -127,7 +127,7 @@ export default function StoreIntegration() {
               : "text-gray-600 hover:text-gray-900"
           }`}
         >
-          🚀 تحسين المتجر
+    🚀 Optimize Store
         </button>
         <button
           onClick={() => setActiveTab("products")}
