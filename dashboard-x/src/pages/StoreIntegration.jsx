@@ -365,7 +365,7 @@ export default function StoreIntegration() {
       {/* Info Box */}
       <div className="mt-6 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-6 border border-blue-200">
         <h3 className="text-lg font-semibold text-blue-900 mb-2">
-          🤖 كيف يعمل Store Integration؟
+          🤖 How does Store Integration work?
         </h3>
         <ul className="space-y-2 text-blue-800">
             <li>✅ Direct integration with Shopify and WooCommerce</li>
