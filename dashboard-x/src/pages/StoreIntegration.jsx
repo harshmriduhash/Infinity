@@ -239,12 +239,12 @@ export default function StoreIntegration() {
       {activeTab === "improve" && (
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
           <h2 className="text-xl font-semibold mb-4">
-            تحسين المتجر بالذكاء الاصطناعي
+             AI-Powered Store Optimization
           </h2>
 
           <div className="mb-4">
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              أهداف التحسين (اختياري)
+              Optimization Goals (Optional)
             </label>
             <input
               type="text"
@@ -260,15 +260,14 @@ export default function StoreIntegration() {
             disabled={loading || !storeUrl || !apiToken}
             className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 px-6 rounded-lg font-medium hover:from-purple-700 hover:to-pink-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
           >
-            {loading ? "جاري التحليل..." : "🚀 تحليل وتحسين المتجر"}
-          </button>
+            {loading ?"Analyzing..." : "🚀 Analyzing & Optimizing the Store"}</button>
 
           {recommendations && (
             <div className="mt-6 space-y-4">
               {/* Critical Issues */}
               <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
                 <h3 className="font-semibold text-red-900 mb-2">
-                  ⚠️ مشاكل حرجة
+                  ⚠️ Critical Issues
                 </h3>
                 <ul className="list-disc list-inside space-y-1 text-red-800 text-sm">
                   {recommendations.criticalIssues?.map((issue, i) => (
@@ -280,7 +279,7 @@ export default function StoreIntegration() {
               {/* Quick Wins */}
               <div className="p-4 bg-green-50 border border-green-200 rounded-lg">
                 <h3 className="font-semibold text-green-900 mb-2">
-                  ⚡ تحسينات سريعة
+                  ⚡ Quick Improvements
                 </h3>
                 <ul className="list-disc list-inside space-y-1 text-green-800 text-sm">
                   {recommendations.quickWins?.map((win, i) => (
@@ -292,7 +291,7 @@ export default function StoreIntegration() {
               {/* Long-term Strategy */}
               <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg">
                 <h3 className="font-semibold text-blue-900 mb-2">
-                  📈 استراتيجية طويلة المدى
+                 📈 Long-Term Strategy
                 </h3>
                 <ul className="list-disc list-inside space-y-1 text-blue-800 text-sm">
                   {recommendations.longTermStrategy?.map((strategy, i) => (
@@ -308,7 +307,7 @@ export default function StoreIntegration() {
       {activeTab === "products" && (
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
           <h2 className="text-xl font-semibold mb-4">
-            توليد وصف المنتجات بالذكاء الاصطناعي
+             AI-Powered Product Description Generation 
           </h2>
 
           <button
@@ -316,9 +315,8 @@ export default function StoreIntegration() {
             disabled={loading || !storeUrl || !apiToken}
             className="w-full bg-gradient-to-r from-orange-600 to-red-600 text-white py-3 px-6 rounded-lg font-medium hover:from-orange-700 hover:to-red-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
           >
-            {loading ? "جاري التوليد..." : "📝 توليد وصف المنتجات"}
+            {loading ? "Generating..." : "📝 Generate Product Description"}
           </button>
-
           {productDescriptions && (
             <div className="mt-6 space-y-4">
               {productDescriptions.map((product, i) => (
@@ -332,7 +330,7 @@ export default function StoreIntegration() {
                   <div className="space-y-2">
                     <div>
                       <p className="text-xs text-gray-500 mb-1">
-                        الوصف القديم:
+                        Old Description:
                       </p>
                       <p className="text-sm text-gray-600 line-through">
                         {product.oldDescription?.substring(0, 100) || "لا يوجد"}
@@ -341,7 +339,7 @@ export default function StoreIntegration() {
                     </div>
                     <div>
                       <p className="text-xs text-green-600 font-medium mb-1">
-                        ✨ الوصف الجديد:
+                    ✨ New Description:
                       </p>
                       <p className="text-sm text-gray-800">
                         {product.newDescription}
