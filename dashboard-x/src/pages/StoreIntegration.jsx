@@ -149,7 +149,7 @@ export default function StoreIntegration() {
           {/* Store Type */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              نوع المتجر
+              Store Type
             </label>
             <select
               value={storeType}
@@ -164,7 +164,7 @@ export default function StoreIntegration() {
           {/* Store URL */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              رابط المتجر
+              Store URL
             </label>
             <input
               type="text"
