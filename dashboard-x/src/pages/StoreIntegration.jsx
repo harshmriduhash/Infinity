@@ -143,8 +143,7 @@ export default function StoreIntegration() {
 
       {/* Store Configuration */}
       <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-6">
-        <h2 className="text-xl font-semibold mb-4">إعدادات المتجر</h2>
-
+          <h2 className="text-xl font-semibold mb-4">Store Settings</h2>
         <div className="space-y-4">
           {/* Store Type */}
           <div>
