@@ -1,110 +1,118 @@
-# 🤖 JOEngine AGI v2.0
+🤖 JOEngine AGI v2.0
 
-**Advanced Artificial General Intelligence System**
+Advanced Artificial General Intelligence System
 
-نظام ذكاء اصطناعي عام (AGI) متقدم، قادر على حل أي مشكلة، تطوير نفسه تلقائياً، وبناء الأنظمة بشكل مستقل بدون تدخل بشري.
+An advanced AGI system capable of solving any problem, self-improving automatically, and building systems independently without human intervention.
 
----
+🌟 Features
+🧠 Reasoning Engine
 
-## 🌟 الميزات
+Analyzes complex goals and breaks them into sub-tasks
 
-### 🧠 Reasoning Engine (العقل المفكر)
-- تحليل الأهداف المعقدة وتقسيمها إلى مهام فرعية
-- التخطيط الاستراتيجي باستخدام Hierarchical Task Network (HTN)
-- اتخاذ القرارات الذكية بناءً على السياق
-- التعلم من الأخطاء وتحسين الخطط
+Strategic planning using Hierarchical Task Network (HTN)
 
-### 🔄 Agent Loop (حلقة التنفيذ المستقلة)
-- تنفيذ المهام بشكل مستقل
-- العمل في الخلفية بشكل مستمر
-- إدارة قائمة انتظار المهام
-- إعادة المحاولة التلقائية عند الفشل
+Context-aware intelligent decision-making
 
-### 🛠️ Advanced Tools System
-- **Browser Tool**: تصفح الويب، تحليل الصفحات، ملء النماذج
-- **Code Tool**: كتابة، تعديل، وتنفيذ الكود (Python, JS, Shell)
-- **Search Tool**: البحث في الإنترنت (قريباً)
-- **File Tool**: إدارة الملفات (قريباً)
-- **API Tool**: الاتصال بأي API خارجي (قريباً)
-- **Deploy Tool**: نشر المشاريع على السحابة (قريباً)
+Learns from mistakes and improves plans
 
-### 📚 Memory System
-- **Short-term Memory**: الذاكرة قصيرة المدى للمحادثة الحالية
-- **Long-term Memory**: الذاكرة طويلة المدى للتجارب السابقة
-- **Plans Memory**: حفظ جميع الخطط المُنشأة
+🔄 Agent Loop (Autonomous Execution Loop)
 
-### 🎓 Self-Learning (قريباً)
-- تحليل الأداء وتحديد نقاط الضعف
-- توليد كود جديد لتحسين النفس
-- اختبار وتطبيق التحسينات تلقائياً
+Executes tasks independently
 
----
+Works continuously in the background
 
-## 🚀 التثبيت
+Manages task queue
 
-### المتطلبات
-- Node.js >= 18.0.0
-- OpenAI API Key
-- MongoDB (اختياري - للذاكرة طويلة المدى)
+Automatically retries on failures
 
-### الخطوات
+🛠️ Advanced Tools System
 
-1. **استنساخ المشروع**
-```bash
+Browser Tool: Browse the web, analyze pages, fill forms
+
+Code Tool: Write, modify, and execute code (Python, JS, Shell)
+
+Search Tool: Internet search (coming soon)
+
+File Tool: File management (coming soon)
+
+API Tool: Connect to any external API (coming soon)
+
+Deploy Tool: Deploy projects to the cloud (coming soon)
+
+📚 Memory System
+
+Short-term Memory: For the current conversation
+
+Long-term Memory: For past experience
+
+Plans Memory: Stores all generated plans
+
+🎓 Self-Learning (Coming Soon)
+
+Performance analysis & weakness detection
+
+Generates new code to self-improve
+
+Tests & applies improvements automatically
+
+🚀 Installation
+Requirements
+
+Node.js >= 18.0.0
+
+OpenAI API Key
+
+MongoDB (optional – for long-term memory)
+
+Steps
+
+Clone the project
+
 cd joengine-agi
-```
 
-2. **تثبيت التبعيات**
-```bash
+
+Install dependencies
+
 npm install
-```
 
-3. **إعداد متغيرات البيئة**
-```bash
+
+Set environment variables
+
 cp .env.example .env
 nano .env
-```
 
-أضف OpenAI API Key:
-```env
+
+Add OpenAI API Key:
+
 OPENAI_API_KEY=sk-proj-your-key-here
 OPENAI_MODEL=gpt-4-turbo-preview
-```
 
-4. **تشغيل JOEngine**
-```bash
+
+Run JOEngine
+
 npm start
-```
 
----
-
-## 📖 الاستخدام
-
-### مثال بسيط
-
-```javascript
+📖 Usage
+Basic Example
 import JOEngine from './index.mjs';
 
-// إنشاء JOEngine
+// Create JOEngine
 const joengine = new JOEngine();
 
-// بدء التشغيل
+// Start engine
 await joengine.start();
 
-// إضافة مهمة
+// Add a task
 await joengine.addTask(
   'Build a simple landing page for a coffee shop',
   { style: 'modern', colors: ['brown', 'white'] }
 );
 
-// عرض الحالة
+// Show status
 joengine.printStatus();
-```
 
-### أمثلة على المهام
-
-#### 1. بناء موقع ويب
-```javascript
+Sample Tasks
+1. Build a website
 await joengine.addTask(
   'Build a complete landing page for a tech startup with contact form',
   { 
@@ -113,10 +121,8 @@ await joengine.addTask(
     sections: ['hero', 'features', 'pricing', 'contact']
   }
 );
-```
 
-#### 2. البحث وتحليل البيانات
-```javascript
+2. Research & data analysis
 await joengine.addTask(
   'Search for the latest AI research papers and create a summary report',
   { 
@@ -125,10 +131,8 @@ await joengine.addTask(
     maxResults: 10
   }
 );
-```
 
-#### 3. تطوير تطبيق
-```javascript
+3. Build an application
 await joengine.addTask(
   'Create a REST API for a todo app with MongoDB',
   { 
@@ -136,10 +140,8 @@ await joengine.addTask(
     database: 'mongodb'
   }
 );
-```
 
-#### 4. تحليل موقع منافس
-```javascript
+4. Competitor analysis
 await joengine.addTask(
   'Analyze competitor website and extract key features',
   { 
@@ -147,97 +149,102 @@ await joengine.addTask(
     analyze: ['design', 'features', 'pricing', 'technology']
   }
 );
-```
 
----
-
-## 🏗️ البنية المعمارية
-
-```
+🏗️ Architecture
 joengine-agi/
 ├── core/
-│   └── AgentLoop.mjs          # حلقة التنفيذ المستقلة
+│   └── AgentLoop.mjs          # Autonomous execution loop
 ├── engines/
-│   └── ReasoningEngine.mjs    # محرك التفكير والتخطيط
+│   └── ReasoningEngine.mjs    # Reasoning & planning engine
 ├── tools/
-│   ├── ToolsSystem.mjs         # نظام إدارة الأدوات
-│   ├── BrowserTool.mjs         # أداة تصفح الويب
-│   ├── CodeTool.mjs            # أداة البرمجة
-│   └── ...                     # المزيد من الأدوات
+│   ├── ToolsSystem.mjs         # Tool management system
+│   ├── BrowserTool.mjs         # Web browser tool
+│   ├── CodeTool.mjs            # Coding tool
+│   └── ...                     # More tools
 ├── interfaces/
-│   └── RemoteControl.mjs       # واجهة التحكم عن بعد (قريباً)
+│   └── RemoteControl.mjs       # Remote control interface (coming soon)
 ├── config/
-│   └── config.mjs              # ملفات الإعدادات
+│   └── config.mjs              # Configuration files
 ├── logs/
-│   └── joengine.log            # سجلات النظام
-├── index.mjs                   # نقطة الدخول الرئيسية
+│   └── joengine.log            # System logs
+├── index.mjs                   # Main entry point
 ├── package.json
 └── README.md
-```
 
----
+🎯 Roadmap
+✅ Phase 1: Basics (Completed)
 
-## 🎯 خارطة الطريق
+ Reasoning Engine
 
-### ✅ المرحلة 1: الأساسيات (مكتملة)
-- [x] Reasoning Engine
-- [x] Agent Loop
-- [x] Tools System
-- [x] Browser Tool
-- [x] Code Tool
+ Agent Loop
 
-### ⏳ المرحلة 2: الأدوات المتقدمة (قيد التطوير)
-- [ ] Search Tool
-- [ ] File Tool
-- [ ] Shell Tool
-- [ ] API Tool
-- [ ] Database Tool
-- [ ] Deploy Tool
+ Tools System
 
-### 📅 المرحلة 3: التعلم الذاتي (مخطط)
-- [ ] Self-Learning Engine
-- [ ] Code Generation for Self-Improvement
-- [ ] Automated Testing
-- [ ] Self-Deployment
+ Browser Tool
 
-### 📅 المرحلة 4: الواجهات (مخطط)
-- [ ] Remote Control UI
-- [ ] WebSocket API
-- [ ] REST API
-- [ ] CLI Interface
+ Code Tool
 
-### 📅 المرحلة 5: التكامل (مخطط)
-- [ ] GitHub Integration
-- [ ] Cloudflare Integration
-- [ ] AWS Integration
-- [ ] Docker/Kubernetes Support
+⏳ Phase 2: Advanced Tools (In Progress)
 
----
+ Search Tool
 
-## 🔧 التطوير
+ File Tool
 
-### تشغيل في وضع التطوير
-```bash
+ Shell Tool
+
+ API Tool
+
+ Database Tool
+
+ Deploy Tool
+
+📅 Phase 3: Self-Learning (Planned)
+
+ Self-Learning Engine
+
+ Code Generation for Self-Improvement
+
+ Automated Testing
+
+ Self-Deployment
+
+📅 Phase 4: Interfaces (Planned)
+
+ Remote Control UI
+
+ WebSocket API
+
+ REST API
+
+ CLI Interface
+
+📅 Phase 5: Integrations (Planned)
+
+ GitHub Integration
+
+ Cloudflare Integration
+
+ AWS Integration
+
+ Docker/Kubernetes Support
+
+🔧 Development
+Development mode
 npm run dev
-```
 
-### الاختبارات
-```bash
+Tests
 npm test
-```
 
----
+📊 Stats
 
-## 📊 الإحصائيات
+Check JOEngine status:
 
-عرض حالة JOEngine:
-```javascript
 const status = joengine.getStatus();
 console.log(status);
-```
 
-النتيجة:
-```json
+
+Output:
+
 {
   "agentLoop": {
     "running": true,
@@ -265,46 +272,40 @@ console.log(status);
     }
   }
 }
-```
 
----
+🤝 Contribution
 
-## 🤝 المساهمة
+We welcome contributions! To contribute:
 
-نرحب بجميع المساهمات! إذا كنت تريد المساهمة:
+Fork the project
 
-1. Fork المشروع
-2. أنشئ branch جديد (`git checkout -b feature/amazing-feature`)
-3. Commit تغييراتك (`git commit -m 'Add amazing feature'`)
-4. Push إلى branch (`git push origin feature/amazing-feature`)
-5. افتح Pull Request
+Create a new branch (git checkout -b feature/amazing-feature)
 
----
+Commit your changes (git commit -m 'Add amazing feature')
 
-## 📄 الترخيص
+Push the branch (git push origin feature/amazing-feature)
 
-MIT License - انظر ملف [LICENSE](LICENSE)
+Open a Pull Request
 
----
+📄 License
 
-## 🙏 الشكر
+MIT License – See the LICENSE
+ file
 
-- **OpenAI** - لتوفير GPT-4
-- **Playwright** - لأداة تصفح الويب
-- **LangChain** - للإلهام في تصميم الأدوات
+🙏 Thanks
 
----
+OpenAI – For GPT-4
 
-## 📞 الدعم
+Playwright – For browser automation
 
-إذا واجهت أي مشاكل أو لديك أسئلة:
+LangChain – For inspiration around tool design
 
-- افتح Issue على GitHub
-- راسلنا على: support@infinityx.com
-- انضم إلى Discord: [رابط Discord]
+📞 Support
 
----
+If you face issues or have questions:
 
-**صُنع بـ ❤️ بواسطة InfinityX Platform**
+Open an Issue on GitHub
 
-**JOEngine AGI - المستقبل الآن!** 🚀
+Made with ❤️ by Harsh Mriduhash
+
+JOEngine AGI – The Future is Now! 🚀
