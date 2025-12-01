@@ -220,14 +220,13 @@ export default function StoreIntegration() {
           {connectionResult && (
             <div className="mt-6 p-4 bg-green-50 border border-green-200 rounded-lg">
               <h3 className="font-semibold text-green-900 mb-2">
-                ✅ تم الربط بنجاح!
+                ✅ Successfully Connected!
               </h3>
               <p className="text-green-800">
                 <strong>اسم المتجر:</strong> {connectionResult.storeData?.name}
               </p>
               <p className="text-green-800 text-sm">
-                تم الاتصال في:{" "}
-                {new Date(
+                  Connected at:{" "}                {new Date(
                   connectionResult.storeData?.connectedAt
                 ).toLocaleString("ar")}
               </p>
