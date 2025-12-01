@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
-import { getActivityStream } from '../api/system';
-import ActivityTable from '../components/ActivityTable';
+import { useState, useEffect } from "react";
+import { getActivityStream } from "../api/system";
+import ActivityTable from "../components/ActivityTable";
 
 export default function Activity() {
   const [events, setEvents] = useState([]);
@@ -47,7 +47,7 @@ export default function Activity() {
           disabled={loading}
           className="btn-secondary"
         >
-          {loading ? 'Refreshing...' : 'Refresh'}
+          {loading ? "Refreshing..." : "Refresh"}
         </button>
       </div>
 
