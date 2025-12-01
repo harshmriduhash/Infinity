@@ -1,48 +1,48 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useSessionToken } from '../hooks/useSessionToken';
-import apiClient from '../api/client';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useSessionToken } from "../hooks/useSessionToken";
+import apiClient from "../api/client";
 
 export default function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const { saveToken } = useSessionToken();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
-    
+    setError("");
+
     if (!email.trim() || !password.trim()) {
-      setError('Please enter both email and password');
+      setError("Please enter both email and password");
       return;
     }
-    
+
     setLoading(true);
-    
+
     try {
-      const response = await apiClient.post('/api/auth/login', {
+      const response = await apiClient.post("/api/auth/login", {
         emailOrPhone: email,
-        password: password
+        password: password,
       });
-      
+
       if (response.data.ok && response.data.sessionToken) {
         saveToken(response.data.sessionToken);
-        navigate('/overview');
+        navigate("/overview");
       } else {
-        setError('Login failed. Please try again.');
+        setError("Login failed. Please try again.");
       }
     } catch (err) {
-      console.error('Login error:', err);
-      
-      if (err.response?.data?.error === 'BAD_CREDENTIALS') {
-        setError('Invalid email or password');
+      console.error("Login error:", err);
+
+      if (err.response?.data?.error === "BAD_CREDENTIALS") {
+        setError("Invalid email or password");
       } else if (err.response?.status === 500) {
-        setError('Server error. Please try again later.');
+        setError("Server error. Please try again later.");
       } else {
-        setError('Login failed. Please check your connection.');
+        setError("Login failed. Please check your connection.");
       }
     } finally {
       setLoading(false);
@@ -51,18 +51,20 @@ export default function Login() {
 
   const handleGoogleLogin = () => {
     // Redirect to Google OAuth
-    const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID || 'YOUR_GOOGLE_CLIENT_ID';
+    const googleClientId =
+      import.meta.env.VITE_GOOGLE_CLIENT_ID || "YOUR_GOOGLE_CLIENT_ID";
     const redirectUri = `${window.location.origin}/auth/google/callback`;
-    const scope = 'email profile';
-    
-    const googleAuthUrl = `https://accounts.google.com/o/oauth2/v2/auth?` +
+    const scope = "email profile";
+
+    const googleAuthUrl =
+      `https://accounts.google.com/o/oauth2/v2/auth?` +
       `client_id=${googleClientId}&` +
       `redirect_uri=${encodeURIComponent(redirectUri)}&` +
       `response_type=code&` +
       `scope=${encodeURIComponent(scope)}&` +
       `access_type=offline&` +
       `prompt=consent`;
-    
+
     window.location.href = googleAuthUrl;
   };
 
@@ -78,9 +80,7 @@ export default function Login() {
         </div>
 
         <div className="card">
-          <h2 className="text-2xl font-bold mb-6 text-center">
-            Admin Login
-          </h2>
+          <h2 className="text-2xl font-bold mb-6 text-center">Admin Login</h2>
 
           {error && (
             <div className="mb-4 p-3 bg-red-500/10 border border-red-500/50 rounded text-red-400 text-sm">
@@ -124,7 +124,7 @@ export default function Login() {
               className="btn-primary w-full"
               disabled={loading}
             >
-              {loading ? 'Logging in...' : 'Access Dashboard'}
+              {loading ? "Logging in..." : "Access Dashboard"}
             </button>
           </form>
 
@@ -134,7 +134,9 @@ export default function Login() {
                 <div className="w-full border-t border-gray-700"></div>
               </div>
               <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-bgCard text-textDim">Or continue with</span>
+                <span className="px-2 bg-bgCard text-textDim">
+                  Or continue with
+                </span>
               </div>
             </div>
 
@@ -161,7 +163,9 @@ export default function Login() {
                   d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
                 />
               </svg>
-              <span className="text-white font-medium">Sign in with Google</span>
+              <span className="text-white font-medium">
+                Sign in with Google
+              </span>
             </button>
           </div>
         </div>
