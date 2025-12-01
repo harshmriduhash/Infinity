@@ -1,44 +1,45 @@
-import { useState } from 'react';
-import axios from 'axios';
+import { useState } from "react";
+import axios from "axios";
 
-const API_BASE = import.meta.env.VITE_API_BASE || 'https://api.xelitesolutions.com';
+const API_BASE =
+  import.meta.env.VITE_API_BASE || "https://api.xelitesolutions.com";
 
 export default function StoreIntegration() {
-  const [activeTab, setActiveTab] = useState('connect');
+  const [activeTab, setActiveTab] = useState("connect");
   const [loading, setLoading] = useState(false);
-  
+
   // Connection state
-  const [storeType, setStoreType] = useState('shopify');
-  const [storeUrl, setStoreUrl] = useState('');
-  const [apiToken, setApiToken] = useState('');
+  const [storeType, setStoreType] = useState("shopify");
+  const [storeUrl, setStoreUrl] = useState("");
+  const [apiToken, setApiToken] = useState("");
   const [connectionResult, setConnectionResult] = useState(null);
-  
+
   // Improvement state
-  const [improvementGoals, setImprovementGoals] = useState('');
+  const [improvementGoals, setImprovementGoals] = useState("");
   const [recommendations, setRecommendations] = useState(null);
-  
+
   // Product descriptions state
   const [productDescriptions, setProductDescriptions] = useState(null);
-  
-  const [error, setError] = useState('');
+
+  const [error, setError] = useState("");
 
   const handleConnectStore = async () => {
     try {
       setLoading(true);
-      setError('');
+      setError("");
       setConnectionResult(null);
 
       const response = await axios.post(`${API_BASE}/api/store/connect-store`, {
         storeType,
         storeUrl,
-        apiToken
+        apiToken,
       });
 
       if (response.data.ok) {
         setConnectionResult(response.data);
       }
     } catch (err) {
-      console.error('Error:', err);
+      console.error("Error:", err);
       setError(err.response?.data?.error || err.message);
     } finally {
       setLoading(false);
@@ -48,21 +49,21 @@ export default function StoreIntegration() {
   const handleImproveStore = async () => {
     try {
       setLoading(true);
-      setError('');
+      setError("");
       setRecommendations(null);
 
       const response = await axios.post(`${API_BASE}/api/store/improve-store`, {
         storeType,
         storeUrl,
         apiToken,
-        improvementGoals
+        improvementGoals,
       });
 
       if (response.data.ok) {
         setRecommendations(response.data.recommendations);
       }
     } catch (err) {
-      console.error('Error:', err);
+      console.error("Error:", err);
       setError(err.response?.data?.error || err.message);
     } finally {
       setLoading(false);
@@ -72,20 +73,23 @@ export default function StoreIntegration() {
   const handleGenerateDescriptions = async () => {
     try {
       setLoading(true);
-      setError('');
+      setError("");
       setProductDescriptions(null);
 
-      const response = await axios.post(`${API_BASE}/api/store/generate-product-descriptions`, {
-        storeType,
-        storeUrl,
-        apiToken
-      });
+      const response = await axios.post(
+        `${API_BASE}/api/store/generate-product-descriptions`,
+        {
+          storeType,
+          storeUrl,
+          apiToken,
+        }
+      );
 
       if (response.data.ok) {
         setProductDescriptions(response.data.products);
       }
     } catch (err) {
-      console.error('Error:', err);
+      console.error("Error:", err);
       setError(err.response?.data?.error || err.message);
     } finally {
       setLoading(false);
@@ -106,31 +110,31 @@ export default function StoreIntegration() {
       {/* Tabs */}
       <div className="flex space-x-2 mb-6 border-b border-gray-200">
         <button
-          onClick={() => setActiveTab('connect')}
+          onClick={() => setActiveTab("connect")}
           className={`px-6 py-3 font-medium transition-colors ${
-            activeTab === 'connect'
-              ? 'text-blue-600 border-b-2 border-blue-600'
-              : 'text-gray-600 hover:text-gray-900'
+            activeTab === "connect"
+              ? "text-blue-600 border-b-2 border-blue-600"
+              : "text-gray-600 hover:text-gray-900"
           }`}
         >
           🔗 ربط المتجر
         </button>
         <button
-          onClick={() => setActiveTab('improve')}
+          onClick={() => setActiveTab("improve")}
           className={`px-6 py-3 font-medium transition-colors ${
-            activeTab === 'improve'
-              ? 'text-blue-600 border-b-2 border-blue-600'
-              : 'text-gray-600 hover:text-gray-900'
+            activeTab === "improve"
+              ? "text-blue-600 border-b-2 border-blue-600"
+              : "text-gray-600 hover:text-gray-900"
           }`}
         >
           🚀 تحسين المتجر
         </button>
         <button
-          onClick={() => setActiveTab('products')}
+          onClick={() => setActiveTab("products")}
           className={`px-6 py-3 font-medium transition-colors ${
-            activeTab === 'products'
-              ? 'text-blue-600 border-b-2 border-blue-600'
-              : 'text-gray-600 hover:text-gray-900'
+            activeTab === "products"
+              ? "text-blue-600 border-b-2 border-blue-600"
+              : "text-gray-600 hover:text-gray-900"
           }`}
         >
           📝 وصف المنتجات
@@ -140,7 +144,7 @@ export default function StoreIntegration() {
       {/* Store Configuration */}
       <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-6">
         <h2 className="text-xl font-semibold mb-4">إعدادات المتجر</h2>
-        
+
         <div className="space-y-4">
           {/* Store Type */}
           <div>
@@ -166,7 +170,11 @@ export default function StoreIntegration() {
               type="text"
               value={storeUrl}
               onChange={(e) => setStoreUrl(e.target.value)}
-              placeholder={storeType === 'shopify' ? 'https://your-store.myshopify.com' : 'https://your-store.com'}
+              placeholder={
+                storeType === "shopify"
+                  ? "https://your-store.myshopify.com"
+                  : "https://your-store.com"
+              }
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
           </div>
@@ -180,49 +188,60 @@ export default function StoreIntegration() {
               type="password"
               value={apiToken}
               onChange={(e) => setApiToken(e.target.value)}
-              placeholder={storeType === 'shopify' ? 'shpat_...' : 'consumer_key:consumer_secret'}
+              placeholder={
+                storeType === "shopify"
+                  ? "shpat_..."
+                  : "consumer_key:consumer_secret"
+              }
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
             <p className="text-xs text-gray-500 mt-1">
-              {storeType === 'shopify' 
-                ? 'احصل على Access Token من Shopify Admin → Apps → Develop apps'
-                : 'احصل على Consumer Key:Secret من WooCommerce → Settings → Advanced → REST API'}
+              {storeType === "shopify"
+                ? "احصل على Access Token من Shopify Admin → Apps → Develop apps"
+                : "احصل على Consumer Key:Secret من WooCommerce → Settings → Advanced → REST API"}
             </p>
           </div>
         </div>
       </div>
 
       {/* Tab Content */}
-      {activeTab === 'connect' && (
+      {activeTab === "connect" && (
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
           <h2 className="text-xl font-semibold mb-4">ربط المتجر</h2>
-          
+
           <button
             onClick={handleConnectStore}
             disabled={loading || !storeUrl || !apiToken}
             className="w-full bg-gradient-to-r from-green-600 to-teal-600 text-white py-3 px-6 rounded-lg font-medium hover:from-green-700 hover:to-teal-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
           >
-            {loading ? 'جاري الاتصال...' : '🔗 ربط المتجر'}
+            {loading ? "جاري الاتصال..." : "🔗 ربط المتجر"}
           </button>
 
           {connectionResult && (
             <div className="mt-6 p-4 bg-green-50 border border-green-200 rounded-lg">
-              <h3 className="font-semibold text-green-900 mb-2">✅ تم الربط بنجاح!</h3>
+              <h3 className="font-semibold text-green-900 mb-2">
+                ✅ تم الربط بنجاح!
+              </h3>
               <p className="text-green-800">
                 <strong>اسم المتجر:</strong> {connectionResult.storeData?.name}
               </p>
               <p className="text-green-800 text-sm">
-                تم الاتصال في: {new Date(connectionResult.storeData?.connectedAt).toLocaleString('ar')}
+                تم الاتصال في:{" "}
+                {new Date(
+                  connectionResult.storeData?.connectedAt
+                ).toLocaleString("ar")}
               </p>
             </div>
           )}
         </div>
       )}
 
-      {activeTab === 'improve' && (
+      {activeTab === "improve" && (
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-          <h2 className="text-xl font-semibold mb-4">تحسين المتجر بالذكاء الاصطناعي</h2>
-          
+          <h2 className="text-xl font-semibold mb-4">
+            تحسين المتجر بالذكاء الاصطناعي
+          </h2>
+
           <div className="mb-4">
             <label className="block text-sm font-medium text-gray-700 mb-2">
               أهداف التحسين (اختياري)
@@ -241,14 +260,16 @@ export default function StoreIntegration() {
             disabled={loading || !storeUrl || !apiToken}
             className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 px-6 rounded-lg font-medium hover:from-purple-700 hover:to-pink-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
           >
-            {loading ? 'جاري التحليل...' : '🚀 تحليل وتحسين المتجر'}
+            {loading ? "جاري التحليل..." : "🚀 تحليل وتحسين المتجر"}
           </button>
 
           {recommendations && (
             <div className="mt-6 space-y-4">
               {/* Critical Issues */}
               <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
-                <h3 className="font-semibold text-red-900 mb-2">⚠️ مشاكل حرجة</h3>
+                <h3 className="font-semibold text-red-900 mb-2">
+                  ⚠️ مشاكل حرجة
+                </h3>
                 <ul className="list-disc list-inside space-y-1 text-red-800 text-sm">
                   {recommendations.criticalIssues?.map((issue, i) => (
                     <li key={i}>{issue}</li>
@@ -258,7 +279,9 @@ export default function StoreIntegration() {
 
               {/* Quick Wins */}
               <div className="p-4 bg-green-50 border border-green-200 rounded-lg">
-                <h3 className="font-semibold text-green-900 mb-2">⚡ تحسينات سريعة</h3>
+                <h3 className="font-semibold text-green-900 mb-2">
+                  ⚡ تحسينات سريعة
+                </h3>
                 <ul className="list-disc list-inside space-y-1 text-green-800 text-sm">
                   {recommendations.quickWins?.map((win, i) => (
                     <li key={i}>{win}</li>
@@ -268,7 +291,9 @@ export default function StoreIntegration() {
 
               {/* Long-term Strategy */}
               <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg">
-                <h3 className="font-semibold text-blue-900 mb-2">📈 استراتيجية طويلة المدى</h3>
+                <h3 className="font-semibold text-blue-900 mb-2">
+                  📈 استراتيجية طويلة المدى
+                </h3>
                 <ul className="list-disc list-inside space-y-1 text-blue-800 text-sm">
                   {recommendations.longTermStrategy?.map((strategy, i) => (
                     <li key={i}>{strategy}</li>
@@ -280,33 +305,47 @@ export default function StoreIntegration() {
         </div>
       )}
 
-      {activeTab === 'products' && (
+      {activeTab === "products" && (
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-          <h2 className="text-xl font-semibold mb-4">توليد وصف المنتجات بالذكاء الاصطناعي</h2>
-          
+          <h2 className="text-xl font-semibold mb-4">
+            توليد وصف المنتجات بالذكاء الاصطناعي
+          </h2>
+
           <button
             onClick={handleGenerateDescriptions}
             disabled={loading || !storeUrl || !apiToken}
             className="w-full bg-gradient-to-r from-orange-600 to-red-600 text-white py-3 px-6 rounded-lg font-medium hover:from-orange-700 hover:to-red-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
           >
-            {loading ? 'جاري التوليد...' : '📝 توليد وصف المنتجات'}
+            {loading ? "جاري التوليد..." : "📝 توليد وصف المنتجات"}
           </button>
 
           {productDescriptions && (
             <div className="mt-6 space-y-4">
               {productDescriptions.map((product, i) => (
-                <div key={i} className="p-4 bg-gray-50 border border-gray-200 rounded-lg">
-                  <h3 className="font-semibold text-gray-900 mb-2">{product.title}</h3>
+                <div
+                  key={i}
+                  className="p-4 bg-gray-50 border border-gray-200 rounded-lg"
+                >
+                  <h3 className="font-semibold text-gray-900 mb-2">
+                    {product.title}
+                  </h3>
                   <div className="space-y-2">
                     <div>
-                      <p className="text-xs text-gray-500 mb-1">الوصف القديم:</p>
+                      <p className="text-xs text-gray-500 mb-1">
+                        الوصف القديم:
+                      </p>
                       <p className="text-sm text-gray-600 line-through">
-                        {product.oldDescription?.substring(0, 100) || 'لا يوجد'}...
+                        {product.oldDescription?.substring(0, 100) || "لا يوجد"}
+                        ...
                       </p>
                     </div>
                     <div>
-                      <p className="text-xs text-green-600 font-medium mb-1">✨ الوصف الجديد:</p>
-                      <p className="text-sm text-gray-800">{product.newDescription}</p>
+                      <p className="text-xs text-green-600 font-medium mb-1">
+                        ✨ الوصف الجديد:
+                      </p>
+                      <p className="text-sm text-gray-800">
+                        {product.newDescription}
+                      </p>
                     </div>
                   </div>
                 </div>
