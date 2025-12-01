@@ -368,11 +368,11 @@ export default function StoreIntegration() {
           🤖 كيف يعمل Store Integration؟
         </h3>
         <ul className="space-y-2 text-blue-800">
-          <li>✅ ربط مباشر مع Shopify و WooCommerce</li>
-          <li>✅ تحليل ذكي للمتجر باستخدام Gemini AI</li>
-          <li>✅ توصيات مخصصة لتحسين الأداء</li>
-          <li>✅ توليد أوصاف منتجات محسّنة لـ SEO</li>
-          <li>✅ تحديثات تلقائية للمتجر</li>
+            <li>✅ Direct integration with Shopify and WooCommerce</li>
+            <li>✅ Smart store analysis using Gemini AI</li>
+            <li>✅ Personalized recommendations to improve performance</li>
+            <li>✅ SEO-optimized product description generation</li>
+            <li>✅ Automatic store updates</li>
         </ul>
       </div>
     </div>
